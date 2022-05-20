@@ -10,32 +10,31 @@
 using namespace std;
 
 
-vector<vector<char>> activate(vector<vector<char>> vec, int x, int y, int n, int m) {
+void activate(vector<vector<char>> &vec, int x, int y, int n, int m) {
     if (vec[x][y] != '#') {
-        return vec;
+        return;
     }
     vec[x][y] = '1';
     if (x + 1 < n) {
         if (vec[x + 1][y] == '#') {
-            vec = activate(vec, x + 1, y, n, m);
+            activate(vec, x + 1, y, n, m);
         }
     }
     if (y - 1 >= 0) {
         if (vec[x][y - 1] == '#') {
-            vec = activate(vec, x, y - 1, n, m);
+            activate(vec, x, y - 1, n, m);
         }
     }
     if (y + 1 < m) {
         if (vec[x][y + 1] == '#') {
-            vec = activate(vec, x, y + 1, n, m);
+            activate(vec, x, y + 1, n, m);
         }
     }
     if (x - 1 >= 0) {
         if (vec[x - 1][y] == '#') {
-            vec = activate(vec, x - 1, y, n, m);
+            activate(vec, x - 1, y, n, m);
         }
     }
-    return vec;
 }
 
 
@@ -71,8 +70,8 @@ int main() {
         for (int j = 0; j < m; ++j) {
             if (vec[i][j] == '#') {
                 cnt++;
-                vec = activate(vec, i, j, n, m);
-                print(vec, n, m);
+                activate(vec, i, j, n, m);
+                //print(vec, n, m);
             }
         }
     }
